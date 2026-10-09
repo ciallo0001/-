@@ -1,0 +1,30 @@
+{
+  "name": "project-database",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "config:check": "node scripts/config-check.mjs",
+    "doctor": "node scripts/doctor.mjs",
+    "db:backup": "node scripts/backup.mjs create",
+    "db:restore": "node scripts/backup.mjs restore",
+    "db:verify-backup": "node scripts/backup.mjs verify",
+    "test:config": "node --test tests/config.test.mjs",
+    "design:build": "node scripts/build-campus-ddl.mjs",
+    "design:test": "node --env-file=.env --test tests/campus-design.test.mjs",
+    "check": "npm run config:check && npm run doctor && npm test",
+    "env:init": "node scripts/init-env.mjs",
+    "db:init": "node --env-file=.env scripts/init-db.mjs && node --env-file=.env scripts/encrypt-existing.mjs",
+    "db:seed": "node --env-file=.env scripts/seed-admin.mjs",
+    "db:seed:student": "node --env-file=.env scripts/seed-student.mjs",
+    "db:start": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/local-postgres.ps1 start",
+    "db:stop": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/local-postgres.ps1 stop",
+    "db:status": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/local-postgres.ps1 status",
+    "test": "node --env-file=.env --test tests/config.test.mjs tests/password.test.mjs tests/campus-design.test.mjs"
+  },
+  "dependencies": {
+    "pg": "^8.16.3"
+  }
+}

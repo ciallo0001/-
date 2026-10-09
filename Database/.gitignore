@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+*.dump
+*.dump.json
+*.pem
+*.key
+.local/
+node_modules/
+dist/
+*.log
